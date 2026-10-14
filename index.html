@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Ángel Puche Ortega | Método de Interacción Social en el Gimnasio</title>
+  <style>
+    :root {
+      --primary: #1a365d;
+      --primary-light: #2c5282;
+      --accent: #2b6cb0;
+      --text: #1a202c;
+      --text-muted: #4a5568;
+      --bg: #f7fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* Header */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 5.5rem 0 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80') center/cover;
+      opacity: 0.18;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.92;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      font-weight: 400;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 0.5rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--white);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .lead {
+      font-size: 1.12rem;
+      color: var(--text);
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 90px;
+    }
+
+    .about-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-card-body {
+      padding: 1.75rem;
+    }
+
+    .about-card .name {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .about-card .role {
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.1rem;
+      font-size: 0.92rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: var(--bg);
+      border-radius: 8px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .about-extra {
+      margin-top: 0.5rem;
+    }
+
+    .about-extra h3 {
+      margin-top: 1.75rem;
+    }
+
+    .about-extra ul {
+      margin: 0.75rem 0 0 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .about-extra li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Method */
+    .method-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .method-intro img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .method-steps {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.4rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+
+    .step:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .step-content h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    .step-detail {
+      display: none;
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .step.active .step-detail {
+      display: block;
+    }
+
+    .step-detail ul {
+      margin: 0.5rem 0 0 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .step-detail li {
+      margin-bottom: 0.35rem;
+    }
+
+    .click-hint {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    /* Principles */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .principle {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: box-shadow 0.25s;
+    }
+
+    .principle:hover {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .principle-icon {
+      width: 42px;
+      height: 42px;
+      background: #ebf8ff;
+      color: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    /* Recommendations */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    .rec-grid img {
+      width: 100%;
+      border-radius: 12px;
+      height: 420px;
+      object-fit: cover;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .tips-list {
+      list-style: none;
+    }
+
+    .tips-list li {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .tips-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tip-number {
+      background: var(--primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial .author {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .testimonial .author span {
+      display: block;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 4.5rem 0;
+    }
+
+    .cta h2 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.88);
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 0.95rem 2.1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: rgba(255,255,255,0.7);
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-grid,
+      .method-intro,
+      .rec-grid,
+      .principles,
+      .testimonials {
+        grid-template-columns: 1fr;
+      }
+      .about-card {
+        position: static;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="logo">José Ángel Puche Ortega</div>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre mí</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#principios">Principios</a></li>
+        <li><a href="#recomendaciones">Recomendaciones</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Interacción Social en el Entorno del Gimnasio</h1>
+      <p class="subtitle">
+        Un enfoque estructurado y respetuoso para desarrollar habilidades de comunicación 
+        y conexión interpersonal en espacios de entrenamiento.
+      </p>
+      <div class="hero-badge">Método desarrollado por José Ángel Puche Ortega</div>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section id="sobre">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-card">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="José Ángel Puche Ortega - Coach de comunicación en gimnasio">
+          <div class="about-card-body">
+            <div class="name">José Ángel Puche Ortega</div>
+            <div class="role">Especialista en Comunicación Interpersonal en Entornos Deportivos</div>
+            <p>
+              Con años de experiencia observando y analizando las dinámicas sociales 
+              dentro de los gimnasios, he desarrollado un método práctico orientado 
+              a mejorar la capacidad de las personas para iniciar y mantener 
+              conversaciones de forma natural, respetuosa y efectiva.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">+8</div>
+                <div class="stat-label">Años de experiencia</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">+500</div>
+                <div class="stat-label">Personas formadas</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Enfoque en el respeto</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-extra">
+          <h2>¿Quién soy?</h2>
+          <p class="lead">
+            Soy José Ángel Puche Ortega. Desde hace más de ocho años me dedico a estudiar 
+            y enseñar cómo se desarrollan las interacciones humanas en el entorno del gimnasio.
+          </p>
+          <p>
+            Mi trayectoria comenzó como cualquier otra persona que va al gym: observando, 
+            practicando y aprendiendo de los errores. Con el tiempo me di cuenta de que 
+            muchas personas tienen las mismas dificultades a la hora de iniciar una 
+            conversación o de generar una conexión genuina en este espacio.
+          </p>
+
+          <h3>Mi enfoque</h3>
+          <p>
+            No enseño “trucos” ni fórmulas mágicas. Enseño un sistema basado en la 
+            observación, el respeto mutuo y la comunicación auténtica. El objetivo 
+            es que cada persona se sienta más segura y natural al interactuar, 
+            siempre respetando el espacio y las señales de los demás.
+          </p>
+
+          <h3>Formación y experiencia</h3>
+          <ul>
+            <li>Más de 8 años analizando dinámicas sociales en gimnasios</li>
+            <li>Más de 500 personas formadas de forma individual y grupal</li>
+            <li>Especialización en comunicación no verbal y lectura de contexto</li>
+            <li>Enfoque centrado en la ética, el consentimiento y el respeto</li>
+          </ul>
+
+          <h3>¿Para quién es este método?</h3>
+          <p>
+            Para cualquier persona que quiera mejorar sus habilidades sociales 
+            en el gimnasio: desde quienes se sienten inseguros al hablar con 
+            desconocidos hasta quienes ya tienen experiencia pero quieren 
+            refinar su forma de conectar de manera más natural y respetuosa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Método -->
+  <section id="metodo" style="background: var(--white);">
+    <div class="container">
+      <div class="method-intro">
+        <div>
+          <h2>El Método en 5 Fases</h2>
+          <p class="lead">
+            Un proceso estructurado que prioriza la observación, el respeto mutuo 
+            y la comunicación genuina.
+          </p>
+          <p>
+            Cada fase está diseñada para construir sobre la anterior. No se trata 
+            de memorizar frases, sino de desarrollar una forma de pensar y actuar 
+            que se vuelva natural con la práctica.
+          </p>
+          <p class="click-hint">→ Haz clic en cada fase para ver más detalles</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80" alt="Entrenamiento en gimnasio - Método de interacción social">
+      </div>
+
+      <div class="method-steps">
+        <div class="step" onclick="this.classList.toggle('active')">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Observación consciente</h3>
+            <p>
+              Antes de iniciar cualquier interacción, es fundamental leer el entorno. 
+              Observar el lenguaje corporal, el nivel de concentración de la persona 
+              y el momento adecuado evita interrupciones inoportunas.
+            </p>
+            <div class="step-detail">
+              <strong>Qué observar en la práctica:</strong>
+              <ul>
+                <li>Si la persona está con auriculares o concentrada en su serie</li>
+                <li>Si mira alrededor o mantiene la mirada fija en el ejercicio</li>
+                <li>Si está en un momento de descanso natural entre series</li>
+                <li>Si el espacio permite una interacción sin invadir</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" onclick="this.classList.toggle('active')">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Apertura contextual</h3>
+            <p>
+              Las mejores conversaciones nacen de elementos compartidos: un ejercicio, 
+              un equipo, un horario similar o una duda técnica. Utilizar el contexto 
+              del gimnasio genera naturalidad.
+            </p>
+            <div class="step-detail">
+              <strong>Ejemplos de aperturas naturales:</strong>
+              <ul>
+                <li>Preguntar por la técnica de un ejercicio que está realizando</li>
+                <li>Comentar algo sobre el ambiente o el material del gym</li>
+                <li>Ofrecer ayuda si ves que necesita un spot de forma genuina</li>
+                <li>Mencionar un horario o rutina en común de forma casual</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" onclick="this.classList.toggle('active')">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Escucha activa y reciprocidad</h3>
+            <p>
+              Hablar es solo la mitad del proceso. Escuchar con atención, hacer 
+              preguntas abiertas y mostrar interés real transforma un saludo 
+              en una conversación significativa.
+            </p>
+            <div class="step-detail">
+              <strong>Claves de la escucha activa:</strong>
+              <ul>
+                <li>Mantener contacto visual moderado y natural</li>
+                <li>Hacer preguntas que inviten a desarrollar la respuesta</li>
+                <li>Evitar interrumpir o cambiar de tema bruscamente</li>
+                <li>Demostrar interés genuino sin forzar la conversación</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" onclick="this.classList.toggle('active')">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Gestión de señales y límites</h3>
+            <p>
+              Identificar cuándo la otra persona muestra interés o prefiere 
+              continuar con su entrenamiento es una habilidad esencial. 
+              Respetar los límites de forma inmediata es no negociable.
+            </p>
+            <div class="step-detail">
+              <strong>Señales a respetar siempre:</strong>
+              <ul>
+                <li>Respuestas cortas o monosílabos</li>
+                <li>Lenguaje corporal cerrado o que se aleja</li>
+                <li>Mirar el móvil o reanudar el entrenamiento de forma clara</li>
+                <li>Cualquier indicio de incomodidad → retirarse amablemente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" onclick="this.classList.toggle('active')">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>Cierre y continuidad</h3>
+            <p>
+              Saber terminar una interacción de forma positiva y, cuando sea 
+              apropiado, proponer una continuidad cierra el ciclo de forma 
+              profesional y natural.
+            </p>
+            <div class="step-detail">
+              <strong>Formas de cerrar bien:</strong>
+              <ul>
+                <li>Agradecer la conversación de forma breve y sincera</li>
+                <li>Desear un buen entrenamiento sin forzar más diálogo</li>
+                <li>Si hay interés mutuo, proponer coincidir otro día</li>
+                <li>Nunca insistir si la otra persona no da señales claras</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principios -->
+  <section id="principios">
+    <div class="container">
+      <h2>Principios Fundamentales</h2>
+      <p class="lead">
+        Todo el método se sustenta sobre valores claros e inquebrantables. 
+        Sin estos principios, ninguna técnica tiene sentido.
+      </p>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-icon">1</div>
+          <h3>Respeto absoluto</h3>
+          <p>
+            Ninguna estrategia justifica incomodar a otra persona. El consentimiento 
+            implícito y el respeto al espacio personal son la base de cualquier 
+            interacción exitosa. Si hay duda, siempre se prioriza el respeto.
+          </p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-icon">2</div>
+          <h3>Autenticidad</h3>
+          <p>
+            Las técnicas no sustituyen la personalidad. El objetivo es potenciar 
+            la capacidad de ser uno mismo de forma segura y confiada, no crear 
+            una versión artificial o manipuladora.
+          </p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-icon">3</div>
+          <h3>Contexto adecuado</h3>
+          <p>
+            El gimnasio es un espacio de entrenamiento. Las interacciones deben 
+            ser breves, oportunas y nunca interferir con el entrenamiento de 
+            la otra persona ni con el ambiente general del lugar.
+          </p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-icon">4</div>
+          <h3>Mejora continua</h3>
+          <p>
+            Cada interacción es una oportunidad de aprendizaje. Analizar qué 
+            funcionó y qué no permite refinar las habilidades de forma constante 
+            y consciente, sin juzgarse de forma excesiva.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recomendaciones -->
+  <section id="recomendaciones" style="background: var(--white);">
+    <div class="container">
+      <h2>Recomendaciones Prácticas</h2>
+      <p class="lead">
+        Orientaciones concretas para aplicar el método de forma efectiva y ética 
+        en el día a día del gimnasio.
+      </p>
+
+      <div class="rec-grid">
+        <div>
+          <ul class="tips-list">
+            <li>
+              <span class="tip-number">1</span>
+              <div>
+                <strong>Elige el momento correcto.</strong> 
+                Evita interrumpir series intensas o momentos de alta concentración. 
+                Los periodos de descanso entre series o al final del entrenamiento 
+                suelen ser más adecuados.
+              </div>
+            </li>
+            <li>
+              <span class="tip-number">2</span>
+              <div>
+                <strong>Mantén el lenguaje corporal abierto.</strong> 
+                Una postura relajada, contacto visual moderado y una expresión 
+                amable facilitan la recepción positiva del mensaje.
+              </div>
+            </li>
+            <li>
+              <span class="tip-number">3</span>
+              <div>
+                <strong>Utiliza el entorno como aliado.</strong> 
+                Preguntas sobre técnica, recomendaciones de ejercicios o comentarios 
+                sobre el ambiente del gym generan puntos de partida naturales.
+              </div>
+            </li>
+            <li>
+              <span class="tip-number">4</span>
+              <div>
+                <strong>Sé breve en la primera interacción.</strong> 
+                Una conversación corta y positiva deja mejor impresión que una 
+                larga que pueda resultar invasiva.
+              </div>
+            </li>
+            <li>
+              <span class="tip-number">5</span>
+              <div>
+                <strong>Acepta el “no” con elegancia.</strong> 
+                Si la otra persona no muestra interés o prefiere continuar sola, 
+                retírate de forma amable y sin insistir. El respeto genera reputación.
+              </div>
+            </li>
+            <li>
+              <span class="tip-number">6</span>
+              <div>
+                <strong>Cuida tu propia presentación.</strong> 
+                Higiene, ropa adecuada y una actitud enfocada en el entrenamiento 
+                transmiten seriedad y facilitan que los demás se sientan cómodos 
+                interactuando contigo.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80" alt="Ambiente de gimnasio profesional">
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonios">
+    <div class="container">
+      <h2>Lo que dicen quienes han aplicado el método</h2>
+      <p class="lead">
+        Experiencias reales de personas que han trabajado estas habilidades 
+        con un enfoque respetuoso y estructurado.
+      </p>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>
+            “Antes me costaba mucho iniciar cualquier conversación en el gym. 
+            Después de aplicar el método de José Ángel, me siento mucho más 
+            natural y seguro. Lo más importante: siempre desde el respeto.”
+          </p>
+          <div class="author">
+            Carlos M.
+            <span>Alumno desde 2024</span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p>
+            “Lo que más valoro es que no se trata de ‘ligar a toda costa’, 
+            sino de aprender a comunicarse de forma auténtica. He notado 
+            una gran mejora en mi confianza general.”
+          </p>
+          <div class="author">
+            David R.
+            <span>Formación individual</span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p>
+            “El enfoque en la observación y en respetar los límites me 
+            pareció fundamental. Ahora interactúo con mucha más naturalidad 
+            y sin generarme ansiedad.”
+          </p>
+          <div class="author">
+            Alejandro T.
+            <span>Grupo de formación 2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>¿Quieres profundizar en el método?</h2>
+      <p>
+        Si deseas aprender de forma más personalizada cómo aplicar estas estrategias 
+        con seguridad y naturalidad, puedes contactarme para sesiones de formación 
+        individual o grupal.
+      </p>
+      <a href="mailto:contacto@ejemplo.com" class="btn">Solicitar información</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        <strong>José Ángel Puche Ortega</strong> — Método de Interacción Social en el Gimnasio<br>
+        © 2026 · Todos los derechos reservados · Enfoque basado en el respeto y la comunicación auténtica
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
